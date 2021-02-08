@@ -1,15 +1,19 @@
-const hamburgerWrapper = document.querySelector('.hamburger-wrapper');
 const hamburger = document.querySelector('#nav-icon2');
-const navbarWrapper = document.querySelector('.nav-wrapper');
+const navList = document.querySelector('.navbar-list')
+const navBar = document.querySelector('.navbar-top');
+const listItem = document.querySelectorAll('.navbar-list-item');
+navBarLogo = document.querySelector('.navbar-logo');
 
-document.addEventListener('DOMContentLoaded', ()=>{
-     hamburgerWrapper.addEventListener('click', openMenu);
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open')
+    navList.classList.toggle('active');    
+    navBar.classList.toggle('active');  
+    navBarLogo.classList.toggle('active');  
+    listItem.forEach( item => {
+        item.classList.toggle('active')
+    })
 })
 
-function openMenu(){
-     hamburger.classList.toggle('open');
-     navbarWrapper.classList.toggle('open');
-}
 
 function fetchData(coin, fiat){
      fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${coin}&tsyms=${fiat}`)
@@ -23,10 +27,12 @@ function fetchData(coin, fiat){
 
 function scriptData(data){
      // const { name, main: { temp, temp_max, temp_min } } = datos;
-     const { RAW, USD  } = data;
+     const { RAW  } = data;
      console.log(data)    
      console.log(RAW)    
-     console.log(data.RAW.BTC.USD.HIGH24HOUR)    
+     // console.log(data.RAW.BTC.USD.HIGH24HOUR)    
 }
 
 fetchData('BTC', 'USD')
+fetchData('ETH', 'GBP')
+fetchData('ADA', 'ARS')

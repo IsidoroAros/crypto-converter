@@ -5,22 +5,25 @@
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="styles.css">
-     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
      <title>Crypto app calculator</title>
 </head>
 <body class="box-border">
-     <header class="container h-16 header ">
-          <div class="logo font-bold">
+
+     <header class="navbar-top">
+
+          <div class="navbar-logo">
                <h3>Square Coin</h3>
           </div>
-          <div class="nav-wrapper w-full text-center bg-gray-300 bg-opacity-25 p-2">
-               <ul class="nav-list font-medium flex-auto p-3 ease-linear duration-1000">
-                    <li class="nav-item"><a href="#">Converter</a> </li>
-                    <li class="nav-item" class="sign"> <a href="#">Log in</a></li>
-                    <li class="nav-item" class="sign"> <a href="#">Register</a></li>
+
+           <div class="navbar-options">
+               <ul class="navbar-list">
+                   <li><a class="navbar-list-item" href="#">About</a></li>
+                   <li><a class="navbar-list-item" href="#">Parity</a></li>
+                   <li><a class="navbar-list-item" href="#">Converter</a></li>
                </ul>
-          </div>
-          <div class="hamburger-wrapper">
+           </div>
+
+           <div class="hamburger-container">
                <div id="nav-icon2">
                     <span></span>
                     <span></span>
@@ -29,8 +32,47 @@
                     <span></span>
                     <span></span>
                   </div>
-          </div>
+           </div>
+
      </header>
+
+     <section class="landing-hero">
+
+          <div class="video-container">
+               <video src="./assets/video.mp4" type="video/mp4" autoplay loop muted></video>            
+          </div>
+
+          <div class="hero-content">
+               <h1>Square Coin</h1>
+               <h3>Buy, sell and invest crypto</h3>
+          </div>
+     </section>
+
+     <!-- <section class="m-auto w-100 crypto-container p-20">
+
+          <form action="POST" class="flex-auto text-center space-x-20 crypto-form">
+
+               <select name="Crypto" id="crypto" class="crypto-input">
+                    <option disabled selected>Choose coin</option>
+                    <option value="BTC">Bitcoin</option>
+                    <option value="ETH">Ethereum</option>
+                    <option value="XRP">Ripple</option>
+                    <option value="ADA">Cardano</option>
+               </select>
+               
+               <select name="Fiat" id="Fiat" class="crypto-input">
+                    <option disabled selected>Choose fiat</option>
+                    <option value="USD">US Dollar</option>
+                    <option value="EUR">Euro</option>
+                    <option value="ARS">Argentine peso</option>
+                    <option value="GBP">British pound</option>
+               </select>
+
+          </form>
+
+          <button type="submit" class="submit-button">See price</button>
+
+     </section> -->
      
      <script src="app.js"></script>
 </body>
