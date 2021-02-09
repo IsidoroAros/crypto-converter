@@ -20,11 +20,12 @@ function changeNavbar(){
 
 //* ---------------------------------- Fetching API
 
-const parityInjection = document.querySelector('.parity-injection');
 const submit = document.querySelector('.submit-button');
 const form = document.querySelector('.crypto-form');
 const cryptoInput = document.querySelector('#crypto');
 const fiatInput = document.querySelector('#fiat');
+const paritySection = document.querySelector('.parity');
+const parityContainer = document.querySelector('.parity-container');
 const parity = {
      coin: '',
      fiat: ''
@@ -36,7 +37,7 @@ function fetchData(coin, fiat){
           .then( data => {
                scriptData(data, coin, fiat)
           })
-          // .catch( err => console.log('Problemas con la moneda'))
+          .catch( err => errorMessage(err))
 }
 
 form.addEventListener('submit', (e)=>{
@@ -51,25 +52,106 @@ form.addEventListener('submit', (e)=>{
 
 function scriptData(data, coin, fiat){
      const { RAW } = data;
-     console.log(RAW[coin][fiat].PRICE)    
-     console.log(RAW[coin][fiat].LOW24HOUR)    
-     console.log(RAW[coin][fiat].HIGH24HOUR)    
+     const price = RAW[coin][fiat].PRICE; 
+     const high24hs = RAW[coin][fiat].HIGH24HOUR;
+     const low24hs = RAW[coin][fiat].LOW24HOUR; 
+
+     spinner();
+     window.scroll({
+          bottom: 200,
+          behavior: "smooth"
+     })
+
+     setTimeout(() => {
+          const parityResult = document.createElement('div');
+          parityResult.classList.add('parity-result');
+          let sign;
+
+          if(fiat === 'EUR') sign = '€';
+          if(fiat === 'GBP') sign = '£';
+          else sign = '$';
+
+          parityResult.innerHTML = `
+          <div class="parity-info">
+               <h2>${coin} / ${fiat}</h2>
+               <p>Current price: ${sign}${price}</p>
+               <p>Highest 24 hs: ${sign}${high24hs}</p>
+               <p>Lowest 24 hs: ${sign}${low24hs}</p>
+          </div>
+          `;
+
+
+          parityContainer.appendChild(parityResult)   
+     }, 1600);
 }
 
 function validateData(parity){
      const { coin, fiat } = parity;
 
-     if(crypto === 'Coin' || fiat === 'Fiat'){
-          errorMessage()
+     if(crypto === 'Coin' && fiat === 'Fiat'){
+          errorMessage('Cannot convert empty fields');
+          clearHTML();
+     }else if(crypto === 'Coin' && fiat !== 'Fiat'){
+          errorMessage(`Cannot convert an empty field to ${fiat}`);
+          clearHTML();
+     }else if(crypto !== 'Coin' && fiat === 'Fiat'){
+          errorMessage(`Cannot convert ${coin} to an empty field`);
+          clearHTML();
      }else{
           fetchData(coin, fiat);
+          form.reset()
      }
+}
+
+const errorMessage = message => {
+
+     const messageHandler = document.createElement('div');
+     messageHandler.classList.add('errorMessage');
+     messageHandler.innerHTML =  `
+     <h3>${message}</h3>
+     `;
+     paritySection.insertBefore(messageHandler, form);
+     setTimeout(() => {
+          messageHandler.remove();
+     }, 5000);
 
 }
 
-const errorMessage = message =>{
-
-     document.createElement('div')
-
+function clearHTML(){
+     while(parityContainer.firstChild){
+          parityContainer.removeChild(parityContainer.firstChild);
+     }
 }
+
+function spinner(){
+
+     clearHTML();
+
+     const divSpinner = document.createElement('div');
+
+     divSpinner.classList.add('sk-fading-circle');
+
+     divSpinner.innerHTML = `
+          <div class="sk-circle1 sk-circle"></div>
+          <div class="sk-circle2 sk-circle"></div>
+          <div class="sk-circle3 sk-circle"></div>
+          <div class="sk-circle4 sk-circle"></div>
+          <div class="sk-circle5 sk-circle"></div>
+          <div class="sk-circle6 sk-circle"></div>
+          <div class="sk-circle7 sk-circle"></div>
+          <div class="sk-circle8 sk-circle"></div>
+          <div class="sk-circle9 sk-circle"></div>
+          <div class="sk-circle10 sk-circle"></div>
+          <div class="sk-circle11 sk-circle"></div>
+          <div class="sk-circle12 sk-circle"></div>
+     `;
+
+     parityContainer.appendChild(divSpinner);
+
+     setTimeout(() => {
+          divSpinner.remove();
+     }, 1500);
+}
+
+//TODO: add media queries
 
