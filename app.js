@@ -1,38 +1,75 @@
+//* ---------------------------------- DOM Scripting
+
 const hamburger = document.querySelector('#nav-icon2');
 const navList = document.querySelector('.navbar-list')
 const navBar = document.querySelector('.navbar-top');
 const listItem = document.querySelectorAll('.navbar-list-item');
-navBarLogo = document.querySelector('.navbar-logo');
+const navBarLogo = document.querySelector('.navbar-logo');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open')
-    navList.classList.toggle('active');    
-    navBar.classList.toggle('active');  
-    navBarLogo.classList.toggle('active');  
-    listItem.forEach( item => {
-        item.classList.toggle('active')
-    })
-})
+hamburger.addEventListener('click', changeNavbar)
 
+function changeNavbar(){
+     hamburger.classList.toggle('open')
+     navList.classList.toggle('active');    
+     navBar.classList.toggle('active');  
+     navBarLogo.classList.toggle('active');  
+     listItem.forEach( item => {
+         item.classList.toggle('active')
+     })
+}
+
+//* ---------------------------------- Fetching API
+
+const parityInjection = document.querySelector('.parity-injection');
+const submit = document.querySelector('.submit-button');
+const form = document.querySelector('.crypto-form');
+const cryptoInput = document.querySelector('#crypto');
+const fiatInput = document.querySelector('#fiat');
+const parity = {
+     coin: '',
+     fiat: ''
+}
 
 function fetchData(coin, fiat){
      fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${coin}&tsyms=${fiat}`)
           .then( response => response.json())
           .then( data => {
-               scriptData(data)
+               scriptData(data, coin, fiat)
           })
           // .catch( err => console.log('Problemas con la moneda'))
 }
 
+form.addEventListener('submit', (e)=>{
+     e.preventDefault();
 
-function scriptData(data){
-     // const { name, main: { temp, temp_max, temp_min } } = datos;
-     const { RAW  } = data;
-     console.log(data)    
-     console.log(RAW)    
-     // console.log(data.RAW.BTC.USD.HIGH24HOUR)    
+     parity.coin = cryptoInput.value;
+     parity.fiat = fiatInput.value;
+
+     validateData(parity);
+
+})
+
+function scriptData(data, coin, fiat){
+     const { RAW } = data;
+     console.log(RAW[coin][fiat].PRICE)    
+     console.log(RAW[coin][fiat].LOW24HOUR)    
+     console.log(RAW[coin][fiat].HIGH24HOUR)    
 }
 
-fetchData('BTC', 'USD')
-fetchData('ETH', 'GBP')
-fetchData('ADA', 'ARS')
+function validateData(parity){
+     const { coin, fiat } = parity;
+
+     if(crypto === 'Coin' || fiat === 'Fiat'){
+          errorMessage()
+     }else{
+          fetchData(coin, fiat);
+     }
+
+}
+
+const errorMessage = message =>{
+
+     document.createElement('div')
+
+}
+

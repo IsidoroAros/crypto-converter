@@ -6,13 +6,14 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="styles.css">
      <title>Crypto app calculator</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 </head>
 <body class="box-border">
 
      <header class="navbar-top">
 
           <div class="navbar-logo">
-               <h3>Square Coin</h3>
+               <i class="fab fa-viacoin"></i>
           </div>
 
            <div class="navbar-options">
@@ -39,40 +40,89 @@
      <section class="landing-hero">
 
           <div class="video-container">
-               <video src="./assets/video.mp4" type="video/mp4" autoplay loop muted></video>            
+               <video src="./assets/world.mp4" type="video/mp4" autoplay muted loop></video>            
           </div>
 
-          <div class="hero-content">
-               <h1>Square Coin</h1>
+          <div class="content">
+               <h1>VICTORY COIN</h1>
                <h3>Buy, sell and invest crypto</h3>
           </div>
+
+          <!-- <section class="quote-container">
+               <blockquote class="quote">Lost coins only make everyone else's coins worth slightly more.  Think of it as a donation to everyone.</blockquote>
+          </section> -->
      </section>
 
-     <!-- <section class="m-auto w-100 crypto-container p-20">
+     <section class="about-us">
 
-          <form action="POST" class="flex-auto text-center space-x-20 crypto-form">
+          <div class="about-card">
+               <div class="icon-holder">
+                    <i class="fas fa-lock icon"></i>
+               </div>
+               <div class="card-info">
+                    <h3>Security</h3>
+                    <p>Our main goal is to mantain our clients security, that's why we've created the first biometric 10 key safe wallet.</p>
+               </div>
+          </div>
 
-               <select name="Crypto" id="crypto" class="crypto-input">
-                    <option disabled selected>Choose coin</option>
-                    <option value="BTC">Bitcoin</option>
-                    <option value="ETH">Ethereum</option>
-                    <option value="XRP">Ripple</option>
-                    <option value="ADA">Cardano</option>
-               </select>
-               
-               <select name="Fiat" id="Fiat" class="crypto-input">
-                    <option disabled selected>Choose fiat</option>
-                    <option value="USD">US Dollar</option>
-                    <option value="EUR">Euro</option>
-                    <option value="ARS">Argentine peso</option>
-                    <option value="GBP">British pound</option>
-               </select>
+          <div class="about-card">
+               <div class="icon-holder">
+                    <i class="fas fa-hands-helping icon"></i>
+               </div>
+               <div class="card-info">
+                    <h3>Trust</h3>
+                    <p>We are the first company worldwide to ensure your crypto if someone hacks us (if they can).</p>
+               </div>
+          </div>
+
+          <div class="about-card">
+               <div class="icon-holder">
+                    <i class="fas fa-piggy-bank icon"></i>
+               </div>
+               <div class="card-info">
+                    <h3>Invest</h3>
+                    <p>Invest with us, we offer you different trading bots to bring you an annual 12,4% ROI.</p>
+               </div>
+          </div>
+
+     </section>
+
+
+
+     <section class="parity">
+
+          <div class="errorMessage">
+               <h3>Todos los campos deben ser completados</h3>
+          </div>
+
+          <form class="crypto-form">
+
+               <div class="form-container">
+
+                    <select name="Crypto" id="crypto" class="crypto-input">
+                         <option disabled selected>Coin</option>
+                         <option value="BTC">Bitcoin</option>
+                         <option value="ETH">Ethereum</option>
+                         <option value="XRP">Ripple</option>
+                         <option value="ADA">Cardano</option>
+                    </select>
+                    
+                    <select name="Fiat" id="fiat" class="crypto-input">
+                         <option disabled selected>Fiat</option>
+                         <option value="USD">US Dollar</option>
+                         <option value="EUR">Euro</option>
+                         <option value="ARS">Argentine peso</option>
+                         <option value="GBP">British pound</option>
+                    </select>
+
+               </div>
+
+
+               <button type="submit" class="submit-button">Calculate parity</button>
 
           </form>
 
-          <button type="submit" class="submit-button">See price</button>
-
-     </section> -->
+     </section>
      
      <script src="app.js"></script>
 </body>
